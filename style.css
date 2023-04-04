@@ -3,6 +3,9 @@ body
     font-family: Arial, sans-serif;
     font-size: 18px;
     background: #f4f1de;
+    background: linear-gradient(217deg, #d4fc79ff, rgba(255,0,0,0) 70.71%),
+                linear-gradient(127deg, #84fab0ff, rgba(0,255,0,0) 70.71%),
+                linear-gradient(336deg, #4facfeff, rgba(0,0,255,0) 70.71%);
 }
 
 h1{
@@ -22,7 +25,7 @@ table
     padding: 8px 8px 8px 8px;
     text-align: center;
     border-radius: 8px;
-    background-color: #eaeaea99;
+    background-color: #ffffffcc;
 }
 
 th
@@ -43,7 +46,7 @@ div.textupdates
 {
     width: 600px;
     /* height: 60px; */
-    background-color: #eaeaea99;
+    background-color: #ffffffcc;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -58,17 +61,17 @@ div.textupdates
 
 .cool
 {
-    background-color: #ff0000
+    background-color: #ff0000;
 }
 
 .hot
 {
-    background-color: #81b29a
+    background-color: #81b29a;
 }
 
 .hidden
 {
-    visibility: hidden
+    visibility: hidden;
 }
 
 .blackcard
