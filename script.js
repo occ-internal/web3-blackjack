@@ -1,3 +1,73 @@
+const contractAddress = "0x076029176C3DD788a2080BB47EFf31C55E03AFBf";
+const contractABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "payout",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "placeBet",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+
+let contract;
+let signer;
+const provider = new ethers.providers.Web3Provider(window.ethereum, 80001);
+provider.send("eth_requestAccounts", []).then(() => {
+    provider.listAccounts().then((accounts) => {
+        signer = provider.getSigner(accounts[0]);
+        contract = new ethers.Contract(
+            contractAddress,
+            contractABI,
+            signer
+        );
+    });
+});
+
 // an object to hold all of the variables for the blackjack app
 // to avoid global variable drama
 var bdApp = {};
@@ -36,7 +106,10 @@ function card(suit, value, name) {
 };
 
 
-var newGame = function () {
+var newGame = async function () {
+    const msgValue = 100000000000000; //0.0001
+    let placeBet = contract.placeBet({ value: msgValue });
+    await placeBet;
     // remove newgame button and show hit/stand buttons
     bdApp.newgame.classList.add("hidden");
     
@@ -321,13 +394,17 @@ bdApp.standButton.addEventListener("click", function standLoop() {
     }
 });
 
-var victory = function () {
+var victory = async function () {
     bdApp.wins += 1;
     bdApp.games += 1;
     var explanation = "";
     bdApp.gameStatus = 2; // flag that the game is over
     var playerTotal = handTotal(bdApp.playerHand);
     var dealerTotal = handTotal(bdApp.dealerHand);
+    let payout = await contract.payout();
+    console.log(payout);
+    await payout;
+
     if (playerTotal === 21)
     {
         explanation = "Your hand's value is 21!";
