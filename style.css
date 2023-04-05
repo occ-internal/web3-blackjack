@@ -107,6 +107,11 @@ button
     border-radius: 6px;
 }
 
+button:hover
+{
+    cursor: pointer;
+}
+
 button#newgame
 {
     background-color: green;
