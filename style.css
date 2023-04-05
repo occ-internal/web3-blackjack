@@ -6,6 +6,7 @@ body
     background: linear-gradient(217deg, #d4fc79ff, rgba(255,0,0,0) 70.71%),
                 linear-gradient(127deg, #84fab0ff, rgba(0,255,0,0) 70.71%),
                 linear-gradient(336deg, #4facfeff, rgba(0,0,255,0) 70.71%);
+    min-height: 97vh;
 }
 
 h1{
