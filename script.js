@@ -401,9 +401,6 @@ var victory = async function () {
     bdApp.gameStatus = 2; // flag that the game is over
     var playerTotal = handTotal(bdApp.playerHand);
     var dealerTotal = handTotal(bdApp.dealerHand);
-    let payout = await contract.payout();
-    console.log(payout);
-    await payout;
 
     if (playerTotal === 21)
     {
@@ -419,6 +416,11 @@ var victory = async function () {
     }
     bdApp.textUpdates.innerHTML = "You won!<br>" + explanation + "<br>Press 'New Game' to play again.";
     track();
+
+    let payout = await contract.payout();
+    console.log(payout);
+    await payout;
+
 }
 
 var bust = function () {
