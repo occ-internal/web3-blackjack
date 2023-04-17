@@ -1,5 +1,5 @@
-# Let's play DeFi blackjack!
-Blackjack is one of the most popular casino games in the world. You play by trying to beat the dealer's hand with a hand of cards that add up to as close to 21 as possible without going over. In DeFi Blackjack, you can play the game using cryptocurrency instead of traditional fiat currency.
+# Let's play Web3 Blackjack!
+Blackjack is one of the most popular casino games in the world. You play by trying to beat the dealer's hand with a hand of cards that add up to as close to 21 as possible without going over. In Web3 Blackjack, you can play the game using cryptocurrency instead of traditional fiat currency.
 
 Players will “bet” an amount for each round they play - if they win, they get back twice the amount. If they lose or face a draw, they forfeit the amount to the prize pool.
 
