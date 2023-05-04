@@ -9,9 +9,6 @@ contract BlackjackGame {
     struct Game {
         address player;
         uint256 betAmount;
-        uint256 payoutAmount;
-        uint256 playerTotal;
-        uint256 dealerTotal;
     }
 
     mapping(address => Game) games;
@@ -27,22 +24,15 @@ contract BlackjackGame {
     }
 
     function placeBet() public payable {
-        require(
-            msg.value >= minimumBetAmount,
-            "Not enough balance for entry fee"
-        );
+        require(msg.value >= minimumBetAmount, "Not enough balance for entry fee");
         uint256 amount = msg.value;
-        require(msg.value >= minimumBetAmount, "The bet amount is too low.");
 
         balances[address(this)] += amount;
-        games[msg.sender] = Game(msg.sender, amount, 0, 0, 0);
+        games[msg.sender] = Game(msg.sender, amount);
     }
 
     function payout() public {
-        require(
-            balances[address(this)] >= payoutAmnt,
-            "Not enough prize money."
-        );
+        require(balances[address(this)] >= payoutAmnt, "Not enough prize money.");
 
         address payable player = payable(games[msg.sender].player);
         _transfer(player, payoutAmnt);
@@ -57,7 +47,7 @@ contract BlackjackGame {
     function _transfer(address to, uint256 amount) internal virtual {
         require(address(this) != address(0), "transfer from the zero address");
         require(to != address(0), "transfer to the zero address");
-        unchecked {
+        unchecked { // https://solidity-by-example.org/unchecked-math/
             balances[address(this)] = address(this).balance - amount;
             (bool success, ) = to.call{value: amount}("");
             require(success, "Failed to withdraw entry fee");
